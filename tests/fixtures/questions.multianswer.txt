@@ -1,0 +1,22 @@
+Match the following cities with the correct state:
+* San Francisco: {1:MULTICHOICE:=California#OK~Arizona#Wrong}
+* Tucson: {1:MULTICHOICE:California#Wrong~%100%Arizona#OK}
+* Los Angeles: {1:MULTICHOICE:=California#OK~Arizona#Wrong}
+* Phoenix: {1:MULTICHOICE:%0%California#Wrong~=Arizona#OK}
+The capital of France is {1:SHORTANSWER:%100%Paris#Congratulations!
+~%50%Marseille#No, that is the second largest city in France (after
+Paris).~*#Wrong answer. The capital of France is Paris, of course.}.
+//NEWCLOZEQUESTION
+aangeven {1:SHORTANSWER:=indicate}, {1:SHORTANSWER:=indiquer}
+//NEWCLOZEQUESTION
+aanleren {1:SHORTANSWER:=teach}, {1:SHORTANSWER:=apprendre}
+//NEWCLOZEQUESTION
+This question consists of some text with an answer embedded right here {1:MULTICHOICE:Wrong answer#Feedback for this wrong answer~Another wrong answer#Feedback for the other wrong answer~=Correct answer#Feedback for correct answer~%50%Answer that gives half the credit#Feedback for half credit answer}
+and right after that you will have to deal with this short answer {1:SHORTANSWER:Wrong answer#Feedback for this wrong answer~=Correct answer#Feedback for correct answer~%50%Answer that gives half the credit#Feedback for half credit answer}
+and finally we have a floating point number {2:NUMERICAL:=23.8:0.1#Feedback for correct answer 23.8~%50%23.8:2#Feedback for half credit answer in the nearby region of the correct answer}.
+The multichoice question can also be shown in the vertical display of the standard moodle multiple choice. {2:MCV:1. Wrong answer#Feedback for this wrong answer~2. Another wrong answer#Feedback for the other wrong answer~=3. Correct answer#Feedback for correct answer~%50%4. Answer that gives half the credit#Feedback for half credit answer}
+Or in an horizontal display that is included here in a table {2:MCH:a. Wrong answer#Feedback for this wrong answer~b. Another wrong answer#Feedback for the other wrong answer~=c. Correct answer#Feedback for correct answer~%50%d. Answer that gives half the credit#Feedback for half credit answer}
+A shortanswer question where case must match. Write moodle in upper case letters {1:SHORTANSWER_C:moodle#Feedback for moodle in lower case ~=MOODLE#Feedback for MOODLE in upper case ~%50%Moodle#Feedback for only first letter in upper case}
+Note that addresses like www.moodle.org and smileys :-) all work as normal:
+a) How good is this? {:MULTICHOICE:=Yes#Correct~No#We have a different opinion}
+b) What grade would you give it? {3:NUMERICAL:=3:2}
