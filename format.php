@@ -50,13 +50,18 @@ class qformat_multianswers extends qformat_default {
         $questions = array();
         $newlines = array();
         for ($key = 0; $key < count($lines); $key++) {
-            if (strpos($lines[$key], '//NEWCLOZEQUESTION') === false) {
+            if (strpos($lines[$key], '//NEWCLOZEQUESTION') !== 0) {
                 $newlines[] = $lines[$key];
             } else {
+                $questiontext = array();
                 $questiontext['text'] = implode('', $newlines);
                 $questiontext['format'] = FORMAT_MOODLE;
                 $questiontext['itemid'] = '';
                 $question = qtype_multianswer_extract_question($questiontext);
+                $errors = qtype_multianswer_validate_question($question);
+                if ($errors) {
+                    $this->error(get_string('invalidmultianswerquestion', 'qtype_multianswer', implode(' ', $errors)));
+                } else {
                 $question->questiontext = $question->questiontext['text'];
                 $question->questiontextformat = FORMAT_MOODLE;
                 $question->qtype = 'multianswer';
@@ -64,8 +69,6 @@ class qformat_multianswers extends qformat_default {
                 $question->generalfeedbackformat = FORMAT_MOODLE;
                 $question->length = 1;
                 $question->penalty = 0.3333333;
-
-                if (!empty($question)) {
                     $question->name = $this->create_default_question_name($question->questiontext, get_string('questionname', 'question'));
                     $questions[] = $question;
                 }
@@ -74,10 +77,15 @@ class qformat_multianswers extends qformat_default {
         }
         // In case there is a single question or a question after the last  '//NEWCLOZEQUESTION'.
         if (!empty($newlines)) {
+            $questiontext = array();
             $questiontext['text'] = implode('', $newlines);
             $questiontext['format'] = FORMAT_MOODLE;
             $questiontext['itemid'] = '';
             $question = qtype_multianswer_extract_question($questiontext);
+            $errors = qtype_multianswer_validate_question($question);
+            if ($errors) {
+                $this->error(get_string('invalidmultianswerquestion', 'qtype_multianswer', implode(' ', $errors)));
+            } else {
             $question->questiontext = $question->questiontext['text'];
             $question->questiontextformat = FORMAT_MOODLE;
             $question->qtype = 'multianswer';
@@ -85,8 +93,6 @@ class qformat_multianswers extends qformat_default {
             $question->generalfeedbackformat = FORMAT_MOODLE;
             $question->length = 1;
             $question->penalty = 0.3333333;
-
-            if (!empty($question)) {
                 $question->name = $this->create_default_question_name($question->questiontext, get_string('questionname', 'question'));
                 $questions[] = $question;
             }

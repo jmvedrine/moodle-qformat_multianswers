@@ -1,0 +1,7 @@
+Please select the fruits {1:MULTICHOICE:=Apple#Correct}
+//NEWCLOZEQUESTION
+Please select the fruits {1:MULTICHOICE:Pear#Incorrect~%50%Apple#Correct}
+//NEWCLOZEQUESTION
+What grade would you give it? {3:NUMERICAL:=zero}
+//NEWCLOZEQUESTION
+Please select the fruits.
